@@ -10,46 +10,49 @@ namespace Super_Adventure_Time_3000
         {
             Console.WriteLine("Please select a character 1-Barbarian 2-Knight 3-Mage");
             int characterselection = int.Parse(Console.ReadLine());
-            switch (characterselection)
+            if(characterselection == 1)
             {
-                case 1:
-                    Barbarian barbarian = new Barbarian();
-                    barbarian.health = 10;
-                    barbarian.str = 3;
-                    barbarian.def = 2;
-                    barbarian.will = 1;
-                    barbarian.bullrush = 3;
-                    barbarian.shootarrow = 2;
-                    barbarian.inventory = new Inventory();
-                    barbarian.inventory.weapon.name = "Battleaxe";
-                    barbarian.inventory.weapon.damage = 4;
+                    Barbarian maincharacter = new Barbarian();
+                    maincharacter.health = 10;
+                    maincharacter.str = 3;
+                    maincharacter.def = 2;
+                    maincharacter.will = 1;
+                    maincharacter.bullrush = 3;
+                    maincharacter.shootarrow = 2;
+                    maincharacter.inventory = new Inventory();
+                    maincharacter.inventory.weapon.name = "Battleaxe";
+                    maincharacter.inventory.weapon.damage = 4 + maincharacter.str;
                     ArmorSelection();
-                    break;
-                case 2:
-                    Knight knight = new Knight();
-                    knight.health = 10;
-                    knight.str = 2;
-                    knight.def = 3;
-                    knight.will = 2;
-                    knight.slash = 2;
-                    knight.shieldbash = 2;
-                    knight.inventory.weapon.name = "Sword";
-                    knight.inventory.weapon.damage = 3 + knight.str;
+            }
+            else if (characterselection == 2)
+            {
+                    Knight maincharacter = new Knight();
+                    maincharacter.health = 10;
+                    maincharacter.str = 2;
+                    maincharacter.def = 3;
+                    maincharacter.will = 2;
+                    maincharacter.slash = 2;
+                    maincharacter.shieldbash = 2;
+                    maincharacter.inventory.weapon.name = "Sword";
+                    maincharacter.inventory.weapon.damage = 3 + maincharacter.str;
                     ArmorSelection();
-                    break;
-                case 3:
-                    Mage mage = new Mage();
-                    mage.health = 10;
-                    mage.str = 1;
-                    mage.def = 1;
-                    mage.will = 4;
-                    mage.fireball = 3;
-                    mage.icelance = 4;
-                    mage.inventory.weapon.name = "Boomstick";
-                    mage.inventory.weapon.damage = 1;
+            }
+            else if (characterselection ==3)
+            {
+                    Mage maincharacter = new Mage();
+                    maincharacter.health = 10;
+                    maincharacter.str = 1;
+                    maincharacter.def = 1;
+                    maincharacter.will = 4;
+                    maincharacter.fireball = 3;
+                    maincharacter.icelance = 4;
+                    maincharacter.inventory.weapon.name = "Boomstick";
+                    maincharacter.inventory.weapon.damage = 1 + maincharacter.will;
                     ArmorSelection();
-                    break;
-                default:
+            }
+                    
+            else 
+            {
                     Console.WriteLine("This is not an option");
                     CharacterSelection();
                     break;
@@ -172,15 +175,7 @@ namespace Super_Adventure_Time_3000
             TownSquare();
         }
     }
-    public class Humanoid
-    {
-        public int health;
-        public int str;
-        public int def;
-        public int will;
-        public int sweetcashmoney;
-        public Inventory inventory; 
-    }
+   
     public class Barbarian : Humanoid
     {
         public int bullrush = 2;
@@ -210,6 +205,34 @@ namespace Super_Adventure_Time_3000
     {
         public Weapon weapon;
         public Armor armor;
+
+    }
+    public class Enemy : Humanoid
+    {
+        public string name;
+        public int chancetodrop;
+    }
+     public class Humanoid
+    {
+        public int maxhealth;
+        public int health;
+        public int str;
+        public int def;
+        public int will;
+        public int sweetcashmoney;
+        public Inventory inventory; 
+    }
+    public class Battle
+    {
+        Enemy enemy = new Enemy();
+        enemy.health = maincharacter.health - 2;
+        enemy.str = maincharacter.str - 3;
+        enemy.def = maincharacter.def -4;
+        enemy.will = maincharacter.will -2;
+        enemy.sweetcashmoney = maincharacter.sweetcashmoney / 10;
+        enemy.inventory.weapon.damage = maincharacter.inventory.weapon.damage - 2;
+
+
 
     }
 }
