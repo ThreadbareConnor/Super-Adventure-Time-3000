@@ -222,19 +222,23 @@ namespace Super_Adventure_Time_3000
         public int sweetcashmoney;
         public Inventory inventory; 
     }
-    public class Battle
+        public class Battle
     {
-        Enemy enemy = new Enemy();
-        enemy.health = maincharacter.health - 2;
-        enemy.str = maincharacter.str - 3;
-        enemy.def = maincharacter.def -4;
-        enemy.will = maincharacter.will -2;
-        enemy.sweetcashmoney = maincharacter.sweetcashmoney / 10;
-        enemy.inventory.weapon.damage = maincharacter.inventory.weapon.damage - 2;
-
-
-
+            public static void CallEnemy(ref object maincharacter)
+            {
+                Enemy enemy = new Enemy();
+                enemy.health = maincharacter.health - 2;
+                enemy.str = maincharacter.str - 3;
+                enemy.def = maincharacter.def -4;
+                enemy.will = maincharacter.will -2;
+                enemy.sweetcashmoney = maincharacter.sweetcashmoney / 10;
+                enemy.inventory.weapon.damage = maincharacter.inventory.weapon.damage - 2;
+            }
     }
+
+
+
+    
 }
 
 
