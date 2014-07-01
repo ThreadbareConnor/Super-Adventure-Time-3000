@@ -3,7 +3,118 @@
 
 namespace Super_Adventure_Time_3000
 {
+    public class GlobalCommands
+    {
 
+    }
+
+    public class Inventory
+    {
+        public Weapon weapon;
+        public Armor armor;
+        public Item item;
+
+    }
+    public class Weapon
+    {
+        public string name;
+        public int damage;
+    }
+    public class Armor
+    {
+        public string name;
+        public int def;
+    }
+    public class Item
+    {
+        public string name;
+        public int effect;
+    }
+
+    public class Humanoid
+    {
+        public int maxhealth;
+        public int health;
+        public int str;
+        public int def;
+        public int will;
+        public int sweetcashmoney;
+        public Inventory inventory = new Inventory();
+    }
+    public class Barbarian : Humanoid
+    {
+        public int abilityone;
+        public int abilitytwo;
+    }
+    public class Mage : Humanoid
+    {
+        public int abilityone;
+        public int abilitytwo;
+    }
+    public class Knight : Humanoid
+    {
+        public int abilityone;
+        public int abilitytwo;
+    }
+    public class Enemy : Humanoid
+    {
+        public string name;
+        public int chancetodrop;
+    }
+
+    public class Battle
+    {
+        public static void CallEnemy(Humanoid maincharacter)
+        {
+            Enemy enemy = new Enemy();
+            enemy.health = maincharacter.health - 2;
+            enemy.str = maincharacter.str - 3;
+            enemy.def = maincharacter.def - 4;
+            enemy.will = maincharacter.will - 2;
+            enemy.sweetcashmoney = maincharacter.sweetcashmoney / 10;
+            enemy.inventory.weapon.damage = maincharacter.inventory.weapon.damage - 2;
+
+        }
+
+    }
+
+    public class BasicInterfaceCommands
+    {
+        public static void pressonetocontinue()
+        {
+            Console.WriteLine("Enter any key to continue");
+            int didtheyhitakey = int.Parse(Console.ReadLine());
+        }
+    }
+
+    class Program
+    {
+        public static void Main()
+        {
+            Console.WriteLine("Welcome to Super Adventure Time 3000");
+            NewCharacter.CharacterSelection();
+        }
+
+        public static void FirstChoice(Humanoid maincharacter)
+        {
+            Console.WriteLine("You walk out onto the road. To the left, the trees of the forest call to you. \nTo the right you can smell fresh food and hear the clang of a blacksmiths hammer. \n 1-Head to the woods, who needs supplies when your\n the baddest Fuzzy Bunny on the planet. \n 2-Head to town. Even the best adventurers need food. ");
+            int firstchoce = int.Parse(Console.ReadLine());
+            switch (firstchoce)
+            {
+                case 1:
+                    Woods.EdgeWoods(maincharacter);
+                    break;
+                case 2:
+                    Town.TownSquare(maincharacter);
+                    break;
+                default:
+                    Console.WriteLine("This is not an option");
+                    FirstChoice(maincharacter);
+                    break;
+
+            }
+        }
+    }
     public class NewCharacter
     {
         public static void CharacterSelection()
@@ -72,7 +183,7 @@ namespace Super_Adventure_Time_3000
             switch (armorselection)
             {
                 case 1:
-                    
+
                     Armor knightsarmor = new Armor();
                     knightsarmor.name = "Knights Armor";
                     knightsarmor.def = 4;
@@ -100,34 +211,6 @@ namespace Super_Adventure_Time_3000
                     Console.WriteLine("This is not an option");
                     ArmorSelection(maincharacter);
                     break;
-            }
-        }
-    }
-    class Program
-    {
-        public static void Main()
-        {
-            Console.WriteLine("Welcome to Super Adventure Time 3000");
-            NewCharacter.CharacterSelection();
-        }
-
-        public static void FirstChoice(Humanoid maincharacter)
-        {
-            Console.WriteLine("You walk out onto the road. To the left, the trees of the forest call to you. \nTo the right you can smell fresh food and hear the clang of a blacksmiths hammer. \n 1-Head to the woods, who needs supplies when your\n the baddest Fuzzy Bunny on the planet. \n 2-Head to town. Even the best adventurers need food. ");
-            int firstchoce = int.Parse(Console.ReadLine());
-            switch (firstchoce)
-            {
-                case 1:
-                    Woods.EdgeWoods(maincharacter);
-                    break;
-                case 2:
-                    Town.TownSquare(maincharacter);
-                    break;
-                default:
-                    Console.WriteLine("This is not an option");
-                    FirstChoice(maincharacter);
-                    break;
-
             }
         }
     }
@@ -180,6 +263,7 @@ namespace Super_Adventure_Time_3000
                     TownSmith.TownBlacksmith(maincharacter);
                     break;
                 case 2:
+                    TownGerneralStore.Generalstore(maincharacter);
                     break;
                 case 3:
                     Program.FirstChoice(maincharacter);
@@ -190,7 +274,7 @@ namespace Super_Adventure_Time_3000
                     break;
             }
         }
-       
+
     }
     public class TownSmith
     {
@@ -269,7 +353,7 @@ namespace Super_Adventure_Time_3000
                     lordsmail.def = 6;
                     maincharacter.inventory.armor = lordsmail;
                     maincharacter.sweetcashmoney = maincharacter.sweetcashmoney - 25;
-                    Console.WriteLine("You pay the shopkeeper 25 SCM for your shiney new {0}", maincharacter.inventory.armor);
+                    Console.WriteLine("You pay the shopkeeper 25 SCM for your shiney new {0}", maincharacter.inventory.armor.name);
                     BasicInterfaceCommands.pressonetocontinue();
                     TownBlacksmith(maincharacter);
                     break;
@@ -279,7 +363,7 @@ namespace Super_Adventure_Time_3000
                     brutalleathers.def = 5;
                     maincharacter.inventory.armor = brutalleathers;
                     maincharacter.sweetcashmoney = maincharacter.sweetcashmoney - 25;
-                    Console.WriteLine("You pay the shopkeeper 25 SCM for your shiney new {0}", maincharacter.inventory.armor);
+                    Console.WriteLine("You pay the shopkeeper 25 SCM for your shiney new {0}", maincharacter.inventory.armor.name);
                     BasicInterfaceCommands.pressonetocontinue();
                     TownBlacksmith(maincharacter);
                     break;
@@ -289,7 +373,7 @@ namespace Super_Adventure_Time_3000
                     silkrobes.def = 4;
                     maincharacter.inventory.armor = silkrobes;
                     maincharacter.sweetcashmoney = maincharacter.sweetcashmoney - 25;
-                    Console.WriteLine("You pay the shopkeeper 25 SCM for your shiney new {0}", maincharacter.inventory.armor);
+                    Console.WriteLine("You pay the shopkeeper 25 SCM for your shiney new {0}", maincharacter.inventory.armor.name);
                     BasicInterfaceCommands.pressonetocontinue();
                     TownBlacksmith(maincharacter);
                     break;
@@ -300,101 +384,33 @@ namespace Super_Adventure_Time_3000
                     TownArmor(maincharacter);
                     break;
             }
-        }   
+        }
     }
     public class TownGerneralStore
     {
-
-    }
-    public class Barbarian : Humanoid
-    {
-        public int abilityone;
-        public int abilitytwo;
-    }
-    public class Mage : Humanoid
-    {
-        public int abilityone;
-        public int abilitytwo;
-    }
-    public class Knight : Humanoid
-    {
-        public int abilityone;
-        public int abilitytwo;
-    }
-    public class Weapon
-    {
-        public string name;
-        public int damage;
-    }
-    public class Armor
-    {
-        public string name;
-        public int def;
-    }
-    public class item
-    {
-        public string name;
-        int effect;
-    }
-    public class Inventory
-    {
-        public Weapon weapon;
-        public Armor armor;
-        public item item;
-
-    }
-    public class Enemy : Humanoid
-    {
-        public string name;
-        public int chancetodrop;
-    }
-    public class Humanoid
-    {
-        public int maxhealth;
-        public int health;
-        public int str;
-        public int def;
-        public int will;
-        public int sweetcashmoney;
-        public Inventory inventory = new Inventory();
-    }
-    public class Battle
-    {
-        public static void CallEnemy(Humanoid maincharacter)
+        public static void Generalstore(Humanoid maincharacter)
         {
-            Enemy enemy = new Enemy();
-            enemy.health = maincharacter.health - 2;
-            enemy.str = maincharacter.str - 3;
-            enemy.def = maincharacter.def - 4;
-            enemy.will = maincharacter.will - 2;
-            enemy.sweetcashmoney = maincharacter.sweetcashmoney / 10;
-            enemy.inventory.weapon.damage = maincharacter.inventory.weapon.damage - 2;
-
-        }
-        
-    }
-    public class BasicInterfaceCommands
-    {
-        public static void pressonetocontinue()
-        {
-            Console.WriteLine("Enter any key to continue");
-            int didtheyhitakey = int.Parse(Console.ReadLine());
+            Console.WriteLine("You walk into the general store. There are groceries but you already have food. \nThe clerk points to a box full of health potions. \n 1-Buy potions 2- Leave");
+            int gereralstorechoice = int.Parse(Console.ReadLine());
+            switch (gereralstorechoice)
+            {
+                case 1:
+                    Item healthpotion = new Item();
+                    healthpotion.name = "Health Potion";
+                    healthpotion.effect = 5;
+                    maincharacter.inventory.item = healthpotion;
+                    maincharacter.sweetcashmoney = maincharacter.sweetcashmoney - 10;
+                    Console.WriteLine("You hand over ten SCM and recieve your {0}", maincharacter.inventory.item);
+                    BasicInterfaceCommands.pressonetocontinue();
+                    Generalstore(maincharacter);
+                    break;
+                case 2:
+                    Town.TownSquare(maincharacter);
+                    break;
+                default:
+                    Generalstore(maincharacter);
+                    break;
+            }
         }
     }
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
